@@ -1,11 +1,13 @@
-# api documentation for  [babel-core (v6.24.0)](https://babeljs.io/)  [![travis-ci.org build-status](https://api.travis-ci.org/npmdoc/node-npmdoc-babel-core.svg)](https://travis-ci.org/npmdoc/node-npmdoc-babel-core)
+# api documentation for  [babel-core (v6.24.1)](https://babeljs.io/)  [![npm package](https://img.shields.io/npm/v/npmdoc-babel-core.svg?style=flat-square)](https://www.npmjs.org/package/npmdoc-babel-core) [![travis-ci.org build-status](https://api.travis-ci.org/npmdoc/node-npmdoc-babel-core.svg)](https://travis-ci.org/npmdoc/node-npmdoc-babel-core)
 #### Babel compiler core.
 
 [![NPM](https://nodei.co/npm/babel-core.png?downloads=true)](https://www.npmjs.com/package/babel-core)
 
-[![apidoc](https://npmdoc.github.io/node-npmdoc-babel-core/build/screen-capture.buildNpmdoc.browser._2Fhome_2Ftravis_2Fbuild_2Fnpmdoc_2Fnode-npmdoc-babel-core_2Ftmp_2Fbuild_2Fapidoc.html.png)](https://npmdoc.github.io/node-npmdoc-babel-core/build..beta..travis-ci.org/apidoc.html)
+[![apidoc](https://npmdoc.github.io/node-npmdoc-babel-core/build/screenCapture.buildNpmdoc.browser._2Fhome_2Ftravis_2Fbuild_2Fnpmdoc_2Fnode-npmdoc-babel-core_2Ftmp_2Fbuild_2Fapidoc.html.png)](https://npmdoc.github.io/node-npmdoc-babel-core/build/apidoc.html)
 
-![package-listing](https://npmdoc.github.io/node-npmdoc-babel-core/build/screen-capture.npmPackageListing.svg)
+![npmPackageListing](https://npmdoc.github.io/node-npmdoc-babel-core/build/screenCapture.npmPackageListing.svg)
+
+![npmPackageDependencyTree](https://npmdoc.github.io/node-npmdoc-babel-core/build/screenCapture.npmPackageDependencyTree.svg)
 
 
 
@@ -20,14 +22,14 @@
     },
     "dependencies": {
         "babel-code-frame": "^6.22.0",
-        "babel-generator": "^6.24.0",
-        "babel-helpers": "^6.23.0",
+        "babel-generator": "^6.24.1",
+        "babel-helpers": "^6.24.1",
         "babel-messages": "^6.23.0",
-        "babel-register": "^6.24.0",
+        "babel-register": "^6.24.1",
         "babel-runtime": "^6.22.0",
-        "babel-template": "^6.23.0",
-        "babel-traverse": "^6.23.1",
-        "babel-types": "^6.23.0",
+        "babel-template": "^6.24.1",
+        "babel-traverse": "^6.24.1",
+        "babel-types": "^6.24.1",
         "babylon": "^6.11.0",
         "convert-source-map": "^1.1.0",
         "debug": "^2.1.1",
@@ -42,13 +44,13 @@
     "description": "Babel compiler core.",
     "devDependencies": {
         "babel-helper-fixtures": "^6.22.0",
-        "babel-helper-transform-fixture-test-runner": "^6.24.0",
+        "babel-helper-transform-fixture-test-runner": "^6.24.1",
         "babel-polyfill": "^6.23.0"
     },
     "directories": {},
     "dist": {
-        "shasum": "8f36a0a77f5c155aed6f920b844d23ba56742a02",
-        "tarball": "https://registry.npmjs.org/babel-core/-/babel-core-6.24.0.tgz"
+        "shasum": "8c428564dce1e1f41fb337ec34f4c3b022b5ad83",
+        "tarball": "https://registry.npmjs.org/babel-core/-/babel-core-6.24.1.tgz"
     },
     "homepage": "https://babeljs.io/",
     "keywords": [
@@ -104,7 +106,7 @@
         "bench": "make bench",
         "test": "make test"
     },
-    "version": "6.24.0"
+    "version": "6.24.1"
 }
 ```
 
@@ -4615,8 +4617,6 @@ n/a
 - description and source-code
 ```javascript
 function _resolve(dangerous, resolved) {
-  var _this = this;
-
   if (resolved && resolved.indexOf(this) >= 0) return;
 
   resolved = resolved || [];
@@ -4635,20 +4635,12 @@ function _resolve(dangerous, resolved) {
     if (binding.kind === "module") return;
 
     if (binding.path !== this) {
-      var _ret = function () {
-        var ret = binding.path.resolve(dangerous, resolved);
+      var ret = binding.path.resolve(dangerous, resolved);
 
-        if (_this.find(function (parent) {
-          return parent.node === ret.node;
-        })) return {
-            v: void 0
-          };
-        return {
-          v: ret
-        };
-      }();
-
-      if ((typeof _ret === "undefined" ? "undefined" : (0, _typeof3.default)(_ret)) === "object") return _ret.v;
+      if (this.find(function (parent) {
+        return parent.node === ret.node;
+      })) return;
+      return ret;
     }
   } else if (this.isTypeCastExpression()) {
     return this.get("expression").resolve(dangerous, resolved);
@@ -28892,6 +28884,8 @@ n/a
 ```javascript
 function isValidIdentifier(name) {
   if (typeof name !== "string" || _esutils2.default.keyword.isReservedWordES6(name, true)) {
+    return false;
+  } else if (name === "await") {
     return false;
   } else {
     return _esutils2.default.keyword.isIdentifierNameES6(name);
