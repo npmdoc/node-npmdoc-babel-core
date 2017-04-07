@@ -51,7 +51,7 @@
 
         href="https://babeljs.io/"
 
-    >babel-core (v6.24.0)</a>
+    >babel-core (v6.24.1)</a>
 </h1>
 <h4>Babel compiler core.</h4>
 <div class="apidocSectionDiv"><a
@@ -15858,8 +15858,6 @@ default)(_iterator);;) {
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">function _resolve(dangerous, resolved) {
-  var _this = this;
-
   if (resolved &#x26;&#x26; resolved.indexOf(this) &#x3e;= 0) return;
 
   resolved = resolved || [];
@@ -15878,20 +15876,12 @@ default)(_iterator);;) {
     if (binding.kind === &#x22;module&#x22;) return;
 
     if (binding.path !== this) {
-      var _ret = function () {
-        var ret = binding.path.resolve(dangerous, resolved);
+      var ret = binding.path.resolve(dangerous, resolved);
 
-        if (_this.find(function (parent) {
-          return parent.node === ret.node;
-        })) return {
-            v: void 0
-          };
-        return {
-          v: ret
-        };
-      }();
-
-      if ((typeof _ret === &#x22;undefined&#x22; ? &#x22;undefined&#x22; : (0, _typeof3.default)(_ret)) === &#x22;object&#x22;) return _ret.v;
+      if (this.find(function (parent) {
+        return parent.node === ret.node;
+      })) return;
+      return ret;
     }
   } else if (this.isTypeCastExpression()) {
     return this.get(&#x22;expression&#x22;).resolve(dangerous, resolved);
@@ -43448,6 +43438,8 @@ than &#x22; + keys.length));
     <ul>
     <li>description and source-code<pre class="apidocCodePre">function isValidIdentifier(name) {
   if (typeof name !== &#x22;string&#x22; || _esutils2.default.keyword.isReservedWordES6(name, true)) {
+    return false;
+  } else if (name === &#x22;await&#x22;) {
     return false;
   } else {
     return _esutils2.default.keyword.isIdentifierNameES6(name);
