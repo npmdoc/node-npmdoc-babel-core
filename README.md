@@ -1,4 +1,7 @@
-# api documentation for  [babel-core (v6.24.1)](https://babeljs.io/)  [![npm package](https://img.shields.io/npm/v/npmdoc-babel-core.svg?style=flat-square)](https://www.npmjs.org/package/npmdoc-babel-core) [![travis-ci.org build-status](https://api.travis-ci.org/npmdoc/node-npmdoc-babel-core.svg)](https://travis-ci.org/npmdoc/node-npmdoc-babel-core)
+# npmdoc-babel-core
+
+#### api documentation for  [babel-core (v6.24.1)](https://babeljs.io/)  [![npm package](https://img.shields.io/npm/v/npmdoc-babel-core.svg?style=flat-square)](https://www.npmjs.org/package/npmdoc-babel-core) [![travis-ci.org build-status](https://api.travis-ci.org/npmdoc/node-npmdoc-babel-core.svg)](https://travis-ci.org/npmdoc/node-npmdoc-babel-core)
+
 #### Babel compiler core.
 
 [![NPM](https://nodei.co/npm/babel-core.png?downloads=true&downloadRank=true&stars=true)](https://www.npmjs.com/package/babel-core)
@@ -100,7 +103,8 @@
         "bench": "make bench",
         "test": "make test"
     },
-    "version": "6.24.1"
+    "version": "6.24.1",
+    "bin": {}
 }
 ```
 
